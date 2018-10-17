@@ -71,8 +71,7 @@ ostream & operator<<(ostream & stream, Car const & car) {
 		const std::locale locale = std::locale("");
 		std::locale prevLocale = sstream.imbue(locale);
 		const auto& timePut = std::use_facet<std::time_put<char>>(locale);
-		struct tm testDriveLocalTime;
-		localtime_s(&testDriveLocalTime, &car.testDriveStartTime);
+		tm testDriveLocalTime = crossPlatformTime::localtime(car.testDriveStartTime);
 		timePut.put(sstream, sstream, ' ', &testDriveLocalTime, 'c');
 		sstream.imbue(prevLocale);
 		sstream << endl;

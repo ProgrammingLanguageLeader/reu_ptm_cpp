@@ -118,6 +118,7 @@
     <ClInclude Include="Car.h" />
     <ClInclude Include="CarShowroom.h" />
     <ClInclude Include="CommonWorker.h" />
+    <ClInclude Include="localtime.h" />
     <ClInclude Include="Salesman.h" />
     <ClInclude Include="AbstractWorker.h" />
   </ItemGroup>
@@ -125,6 +126,7 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CarShowroom.cpp" />
     <ClCompile Include="CommonWorker.cpp" />
+    <ClCompile Include="localtime.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Salesman.cpp" />
     <ClCompile Include="AbstractWorker.cpp" />

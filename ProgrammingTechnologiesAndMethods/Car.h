@@ -6,6 +6,8 @@
 #include <locale>
 #include <sstream>
 
+#include "localtime.h"
+
 
 using std::string;
 using std::exception;

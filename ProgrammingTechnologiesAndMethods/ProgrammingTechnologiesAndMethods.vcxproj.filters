@@ -30,6 +30,9 @@
     <ClInclude Include="AbstractWorker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="localtime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AbstractWorker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="localtime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
