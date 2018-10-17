@@ -43,8 +43,8 @@ private:
 	string name;
 	list<shared_ptr<Car>> cars;
 	list<shared_ptr<AbstractWorker>> staff;
-	double income;
-	double losses;
+	double income = 0;
+	double losses = 0;
 
 public:
 	CarShowroom(string name);
@@ -70,6 +70,16 @@ public:
 	const string & getName() const
 	{
 		return name;
+	}
+
+	double getIncome() const
+	{
+		return income;
+	}
+
+	double getLosses() const
+	{
+		return losses;
 	}
 };
 

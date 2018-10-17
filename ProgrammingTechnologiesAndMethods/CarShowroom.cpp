@@ -24,6 +24,8 @@ void CarShowroom::sellCar(Salesman& salesman, const string & model)
 		)
 		{
 			carPointer->sell();
+			income += carPointer->getSellCost();
+			losses += carPointer->getBuyCost();
 			salesman.addSalesSum(carPointer->getSellCost());
 			return;
 		}
@@ -45,6 +47,8 @@ void CarShowroom::sellCar(Salesman& salesman, const string & model, const string
 		)
 		{
 			carPointer->sell();
+			income += carPointer->getSellCost();
+			losses += carPointer->getBuyCost();
 			salesman.addSalesSum(carPointer->getSellCost());
 			return;
 		}
@@ -65,6 +69,8 @@ void CarShowroom::sellCar(Salesman& salesman, int id)
 		)
 		{
 			carPointer->sell();
+			income += carPointer->getSellCost();
+			losses += carPointer->getBuyCost();
 			salesman.addSalesSum(carPointer->getSellCost());
 			return;
 		}

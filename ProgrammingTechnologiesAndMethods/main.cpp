@@ -17,6 +17,7 @@ enum Commands {
 	PRINT_SOLD_CARS,
 	START_TEST_DRIVE,
 	END_TEST_DRIVE,
+	GET_REAL_INCOME,
 	EXIT,
 };
 
@@ -36,6 +37,7 @@ int main()
 			<< "(" << PRINT_SOLD_CARS << " - print sold cars" << endl
 			<< "(" << START_TEST_DRIVE << " - start test drive)" << endl
 			<< "(" << END_TEST_DRIVE << " - end test drive)" << endl
+			<< "(" << GET_REAL_INCOME << " - get a real income of the showroom)" << endl
 			<< "(" << EXIT << " and more - exit)" << endl
 			<< "Command: ";
 		int command;
@@ -101,13 +103,11 @@ int main()
 					auto workerById = showroom.getWorker(salesmanId);
 					Salesman& salesman = dynamic_cast<Salesman&>(*workerById);
 
-					cout << "Choose car by model and color" << endl;
-					string model, color;
+					cout << "Choose car by model" << endl;
+					string model;
 					cout << "Model: ";
 					cin >> model;
-					cout << "Color: ";
-					cin >> color;
-					showroom.sellCar(salesman, model, color);
+					showroom.sellCar(salesman, model);
 					cout << "OK" << endl << endl;
 				}
 				catch (bad_cast ex)
@@ -214,6 +214,12 @@ int main()
 					cout << ex.what() << endl << endl;
 					break;
 				}
+				break;
+			}
+
+			case GET_REAL_INCOME:
+			{
+				cout << "Real income = " << showroom.getIncome() - showroom.getLosses() << endl << endl;
 				break;
 			}
 
