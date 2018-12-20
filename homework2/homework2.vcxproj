@@ -20,10 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{4B916E72-FE9E-46FC-95EB-39060E1770FA}</ProjectGuid>
-    <RootNamespace>ProgrammingTechnologiesAndMethods</RootNamespace>
+    <ProjectGuid>{B7B5B127-BBDF-40D5-840F-0D0232EEF8FD}</ProjectGuid>
+    <RootNamespace>DecoratorCpp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
-    <ProjectName>creative_assignment1</ProjectName>
+    <ProjectName>homework2</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -116,21 +116,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Car.h" />
-    <ClInclude Include="CarShowroom.h" />
-    <ClInclude Include="CommonWorker.h" />
-    <ClInclude Include="localtime.h" />
-    <ClInclude Include="Salesman.h" />
-    <ClInclude Include="AbstractWorker.h" />
+    <ClInclude Include="BlackTea.h" />
+    <ClInclude Include="ChocolateCondiment.h" />
+    <ClInclude Include="Espresso.h" />
+    <ClInclude Include="GreenTea.h" />
+    <ClInclude Include="IBeverage.h" />
+    <ClInclude Include="ICondimentsDecoratorBase.h" />
+    <ClInclude Include="MilkCondiment.h" />
+    <ClInclude Include="SugarCondiment.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Car.cpp" />
-    <ClCompile Include="CarShowroom.cpp" />
-    <ClCompile Include="CommonWorker.cpp" />
-    <ClCompile Include="localtime.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Salesman.cpp" />
-    <ClCompile Include="AbstractWorker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
