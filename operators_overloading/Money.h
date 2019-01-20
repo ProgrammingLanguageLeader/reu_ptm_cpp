@@ -36,15 +36,17 @@ public:
 		return *this;
 	}
 
-	Money & operator*= (const Money & money)
+	template<typename T>
+	Money & operator*= (const T & coefficient)
 	{
-		this->value *= money.value;
+		this->value *= coefficient;
 		return *this;
 	}
 
-	Money & operator/= (const Money & money)
+	template<typename T>
+	Money & operator/= (const T & coefficient)
 	{
-		this->value /= money.value;
+		this->value /= coefficient;
 		return *this;
 	}
 
@@ -60,15 +62,17 @@ public:
 		return leftMoney;
 	}
 
-	friend Money operator* (Money leftMoney, Money const & rightMoney)
+	template<typename T>
+	friend Money operator* (Money leftMoney, const T & coefficient)
 	{
-		leftMoney *= rightMoney;
+		leftMoney *= coefficient;
 		return leftMoney;
 	}
 
-	friend Money operator/ (Money leftMoney, Money const & rightMoney)
+	template<typename T>
+	friend Money operator/ (Money leftMoney, const T & coefficient)
 	{
-		leftMoney /= rightMoney;
+		leftMoney /= coefficient;
 		return leftMoney;
 	}
 
@@ -88,7 +92,7 @@ public:
 
 	friend std::ostream & operator<< (std::ostream & output, const Money & money)
 	{
-		output << "rubles = " << money.getRubles() << ", kopecks = " << money.getKopecks();
+		output << "<rubles = " << money.getRubles() << ", kopecks = " << money.getKopecks() << ">";
 		return output;
 	}
 

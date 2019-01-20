@@ -2,8 +2,11 @@
 
 #include "Money.h"
 
-int main()
+int main(int argc, char* argv[])
 {
+	const int multiplicationCoefficient = 3;
+	const double divisionCoefficient = 6;
+
 	// takes an input for the first Money object as double value and prints it
 	std::cout << "Taking input for the second Money object..." << std::endl;
 	double value;
@@ -28,20 +31,22 @@ int main()
 	std::cout << "Doing some arithmetics..." << std::endl;
 	std::cout
 		<< "Addition: " << std::endl
-		<< firstMoney + secondMoney << std::endl
+		<< firstMoney << " + " << secondMoney << " = " << firstMoney + secondMoney << std::endl
 		<< std::endl
 		<< "Subtraction: " << std::endl
-		<< firstMoney - secondMoney << std::endl
+		<< firstMoney << " - " << secondMoney << " = " << firstMoney - secondMoney << std::endl
 		<< std::endl
 		<< "Multiplication: " << std::endl
-		<< firstMoney * secondMoney << std::endl
+		<< firstMoney << " * " << multiplicationCoefficient << " = " << firstMoney * multiplicationCoefficient << std::endl
+		<< secondMoney << " * " << multiplicationCoefficient << " = " << secondMoney * multiplicationCoefficient << std::endl
 		<< std::endl
 		<< "Division: " << std::endl
-		<< firstMoney / secondMoney << std::endl
+		<< firstMoney << " / " << divisionCoefficient << " = " << firstMoney / divisionCoefficient << std::endl
+		<< secondMoney << " / " << divisionCoefficient << " = " << secondMoney / divisionCoefficient << std::endl
 		<< std::endl
 		<< "Sign changing: " << std::endl
-		<< -firstMoney << std::endl
-		<< -secondMoney << std::endl;
+		<< "-" << firstMoney << " = " << -firstMoney << std::endl
+		<< "-" << secondMoney << " = " << -secondMoney << std::endl;
 	std::cout << "Done." << std::endl << std::endl;
 
 	// does comparisons on the first and the second Money objects and prints results
