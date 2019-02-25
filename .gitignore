@@ -262,3 +262,4 @@ __pycache__/
 
 # CMake
 cmake-build-debug/
+cmake-build-release/

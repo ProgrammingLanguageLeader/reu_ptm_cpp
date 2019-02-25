@@ -1,3 +1,5 @@
+#include <utility>
+
 #pragma once
 
 #include <string>
@@ -5,48 +7,45 @@
 #include <exception>
 #include <locale>
 #include <sstream>
-
-#include "localtime.h"
-
+#include <chrono>
+#include <iomanip>
 
 using std::string;
 using std::exception;
 using std::ostream;
 using std::endl;
 using std::stringstream;
-
+using std::chrono::time_point;
+using std::chrono::system_clock;
+using std::put_time;
+using std::localtime;
 
 struct CarTestDriveStartException : public exception
 {
-	CarTestDriveStartException() {};
+	CarTestDriveStartException() = default;
 
-	virtual const char* what() const throw()
-	{
+	const char* what() const noexcept override {
 		return "Car test drive start error";
 	}
 };
 
-
 struct CarTestDriveEndException : public exception
 {
-	CarTestDriveEndException() {};
+	CarTestDriveEndException() = default;
 
-	virtual const char* what() const throw()
-	{
+	const char* what() const noexcept override {
 		return "Car test drive end error";
 	}
 };
 
 struct CarSellingException : public exception
 {
-	CarSellingException() {};
+	CarSellingException() = default;
 
-	virtual const char* what() const throw()
-	{
+	const char* what() const noexcept override {
 		return "Car selling error";
 	}
 };
-
 
 class Car
 {
@@ -54,16 +53,15 @@ private:
 	static int freeId;
 	int id;
 	string model;
-	string color;
 	double buyCost;
 	double sellCost;
 	bool testDriving = false;
 	bool sold = false;
-	time_t testDriveStartTime = 0;
-	time_t sellingTime = 0;
+	time_point<system_clock> testDriveStartTime;
+    time_point<system_clock> sellingTime;
 
 public:
-	Car(double, double, const string &, const string & = "black");
+	Car(double buyCost, double sellCost, const string & model);
 	~Car();
 
 	friend ostream & operator<<(ostream & stream, Car const & car);
@@ -73,14 +71,9 @@ public:
 		return id;
 	}
 
-	const string & getColor() const
-	{
-		return color;
-	}
-
 	void setModel(string newModel)
 	{
-		model = newModel;
+		model = std::move(newModel);
 	}
 
 	double getBuyCost() const
@@ -112,5 +105,5 @@ public:
 	void endTestDrive();
 	void sell();
 
-	bool wasSoldInPeriod(time_t periodBeginTime, time_t periodEndTime) const;
+	bool wasSoldInPeriod(time_point<system_clock> periodBeginTime, time_point<system_clock> periodEndTime) const;
 };

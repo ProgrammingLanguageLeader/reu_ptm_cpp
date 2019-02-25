@@ -1,16 +1,11 @@
 #include "Salesman.h"
 
-
-Salesman::Salesman(const string & name, double salesPercentToSalary): AbstractWorker(name)
+Salesman::Salesman(const string & name, double salesPercentToSalary): AbstractBaseWorker(name)
 {
 	this->salesPercentToSalary = salesPercentToSalary;
 }
 
-
-Salesman::~Salesman()
-{
-}
-
+Salesman::~Salesman() = default;
 
 void Salesman::print(ostream & stream) const
 {
@@ -23,12 +18,10 @@ void Salesman::print(ostream & stream) const
 	stream << sstream.str();
 }
 
-
 double Salesman::getSalary() const
 {
 	return salesSum * salesPercentToSalary;
 }
-
 
 ostream & operator<<(ostream & stream, Salesman const & salesman)
 {

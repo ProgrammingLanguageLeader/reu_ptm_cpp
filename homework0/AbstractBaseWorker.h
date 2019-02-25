@@ -2,11 +2,9 @@
 
 #include <string>
 
-
 using namespace std;
 
-
-class AbstractWorker
+class AbstractBaseWorker
 {
 protected:
 	static int freeId;
@@ -14,9 +12,9 @@ protected:
 	string name = "";
 
 public:
-	AbstractWorker();
-	AbstractWorker(const string &);
-	~AbstractWorker();
+	AbstractBaseWorker();
+	explicit AbstractBaseWorker(const string &);
+	~AbstractBaseWorker();
 
 	virtual void print(ostream & stream) const = 0;
 

@@ -3,25 +3,23 @@
 #include <string>
 #include <sstream>
 
-#include "AbstractWorker.h"
-
+#include "AbstractBaseWorker.h"
 
 using namespace std;
 
-
-class Salesman: public AbstractWorker
+class Salesman: public AbstractBaseWorker
 {
 private:
 	double salesSum = 0;
 	double salesPercentToSalary;
 
 public:
-	Salesman(const string &, double = 0.02);
+	explicit Salesman(const string &, double = 0.02);
 	~Salesman();
 
-	void print(ostream & stream) const;
+	void print(ostream & stream) const override;
 
-	double getSalary() const;
+	double getSalary() const override;
 
 	friend ostream & operator<<(ostream & stream, Salesman const & salesman);
 

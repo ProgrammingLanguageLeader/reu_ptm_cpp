@@ -1,23 +1,16 @@
 #include "Car.h"
 
-
 int Car::freeId = 1;
 
-
-Car::Car(double buy_cost, double sell_cost, const string & model, const string & color)
+Car::Car(double buyCost, double sellCost, const string & model)
 {
 	id = freeId++;
-	this->buyCost = buy_cost;
-	this->sellCost = sell_cost;
+	this->buyCost = buyCost;
+	this->sellCost = sellCost;
 	this->model = model;
-	this->color = color;
 }
 
-
-Car::~Car()
-{
-}
-
+Car::~Car() = default;
 
 void Car::startTestDrive()
 {
@@ -25,7 +18,7 @@ void Car::startTestDrive()
 	{
 		throw CarTestDriveStartException();
 	}
-	testDriveStartTime = time(NULL);
+	testDriveStartTime = system_clock::now();
 	testDriving = true;
 }
 
@@ -38,43 +31,34 @@ void Car::endTestDrive()
 	testDriving = false;
 }
 
-
 void Car::sell()
 {
 	if (sold || testDriving)
 	{
 		throw CarSellingException();
 	}
-	sellingTime = time(NULL);
+	sellingTime = system_clock::now();
 	sold = true;
 }
 
-
-bool Car::wasSoldInPeriod(time_t periodBeginTime, time_t periodEndTime) const
+bool Car::wasSoldInPeriod(time_point<system_clock> periodBeginTime, time_point<system_clock> periodEndTime) const
 {
 	return sold && (periodBeginTime <= sellingTime) && (sellingTime <= periodEndTime);
 }
-
 
 ostream & operator<<(ostream & stream, Car const & car) {
 	stringstream sstream;
 	sstream
 		<< "ID: " << car.id << endl
 		<< "Model: " << car.model << endl
-		<< "Color: " << car.color << endl
 		<< "Buy cost: " << car.buyCost << endl
 		<< "Sell cost: " << car.sellCost << endl
 		<< "Is on test drive? - " << std::boolalpha << car.testDriving << endl;
 	if (car.testDriving)
 	{
 		sstream << "Test drive started at ";
-		const std::locale locale = std::locale("");
-		std::locale prevLocale = sstream.imbue(locale);
-		const auto& timePut = std::use_facet<std::time_put<char>>(locale);
-		tm testDriveLocalTime = crossPlatformTime::localtime(car.testDriveStartTime);
-		timePut.put(sstream, sstream, ' ', &testDriveLocalTime, 'c');
-		sstream.imbue(prevLocale);
-		sstream << endl;
+		const time_t cTestDriveStartTime = system_clock::to_time_t(car.testDriveStartTime);
+		sstream << std::ctime(&cTestDriveStartTime) << endl;
 	}
 	sstream << "Is sold? - " << std::boolalpha << car.sold << endl;
 	stream << sstream.str();

@@ -1,110 +1,40 @@
+#include <utility>
+#include <chrono>
+
 #include "CarShowroom.h"
 
+CarShowroom::CarShowroom() = default;
 
-CarShowroom::CarShowroom(string name)
+CarShowroom::~CarShowroom() = default;
+
+void CarShowroom::sellCar(shared_ptr<Salesman> salesman, const string & model)
 {
-	this->name = name;
-}
-
-
-CarShowroom::~CarShowroom()
-{
-}
-
-
-void CarShowroom::sellCar(Salesman& salesman, const string & model)
-{
-	for (auto iter = cars.begin(); iter != cars.end(); iter++)
-	{
-		auto carPointer = *iter;
+	for (auto & car : cars) {
 		if (
-			carPointer->getModel() == model && 
-			!carPointer->isSold() && 
-			!carPointer->isTestDriving()
+			car->getModel() == model &&
+			!car->isSold() &&
+			!car->isTestDriving()
 		)
 		{
-			carPointer->sell();
-			income += carPointer->getSellCost();
-			losses += carPointer->getBuyCost();
-			salesman.addSalesSum(carPointer->getSellCost());
+			car->sell();
+			income += car->getSellCost();
+			losses += car->getBuyCost();
+			salesman->addSalesSum(car->getSellCost());
 			return;
 		}
 	}
 	throw CarNotFoundException();
 }
-
-
-void CarShowroom::sellCar(Salesman& salesman, const string & model, const string & color)
-{
-	for (auto iter = cars.begin(); iter != cars.end(); iter++)
-	{
-		auto carPointer = *iter;
-		if (
-			carPointer->getModel() == model &&
-			carPointer->getColor() == color &&
-			!carPointer->isSold() &&
-			!carPointer->isTestDriving()
-		)
-		{
-			carPointer->sell();
-			income += carPointer->getSellCost();
-			losses += carPointer->getBuyCost();
-			salesman.addSalesSum(carPointer->getSellCost());
-			return;
-		}
-	}
-	throw CarNotFoundException();
-}
-
-
-void CarShowroom::sellCar(Salesman& salesman, int id)
-{
-	for (auto iter = cars.begin(); iter != cars.end(); iter++)
-	{
-		auto carPointer = *iter;
-		if (
-			carPointer->getId() == id && 
-			!carPointer->isSold() && 
-			!carPointer->isTestDriving()
-		)
-		{
-			carPointer->sell();
-			income += carPointer->getSellCost();
-			losses += carPointer->getBuyCost();
-			salesman.addSalesSum(carPointer->getSellCost());
-			return;
-		}
-	}
-	throw CarNotFoundException();
-}
-
 
 void CarShowroom::addCar(shared_ptr<Car> newCar)
 {
 	cars.push_back(newCar);
 }
 
-
-void CarShowroom::addWorker(shared_ptr<AbstractWorker> worker)
+void CarShowroom::addWorker(shared_ptr<AbstractBaseWorker> worker)
 {
 	staff.push_back(worker);
 }
-
-
-shared_ptr<list<Salesman>> CarShowroom::getSalesmanList() const
-{
-	auto salesmansList = make_shared<list<Salesman>>();
-	for (auto worker : staff)
-	{
-		if (typeid(*worker) == typeid(Salesman))
-		{
-			Salesman salesman = dynamic_cast<Salesman&>(*worker);
-			salesmansList->push_back(salesman);
-		}
-	}
-	return salesmansList;
-}
-
 
 shared_ptr<Car> CarShowroom::getCar(int id) const
 {
@@ -118,21 +48,7 @@ shared_ptr<Car> CarShowroom::getCar(int id) const
 	throw CarNotFoundException();
 }
 
-
-shared_ptr<AbstractWorker> CarShowroom::getWorker(const string & name) const
-{
-	for (auto workerPointer : staff)
-	{
-		if (workerPointer->getName() == name)
-		{
-			return workerPointer;
-		}
-	}
-	throw WorkerNotFoundException();
-}
-
-
-shared_ptr<AbstractWorker> CarShowroom::getWorker(int id) const
+shared_ptr<AbstractBaseWorker> CarShowroom::getWorker(int id) const
 {
 	for (auto workerPointer : staff)
 	{
@@ -144,17 +60,17 @@ shared_ptr<AbstractWorker> CarShowroom::getWorker(int id) const
 	throw WorkerNotFoundException();
 }
 
-
-shared_ptr<list<Car>> CarShowroom::getSoldCarsListByPeriod(tm& periodBegin, tm& periodEnd) const
+list<shared_ptr<Car>> CarShowroom::getSoldCarsListByPeriod(
+		chrono::time_point<chrono::system_clock> periodBegin,
+		chrono::time_point<chrono::system_clock> periodEnd
+		) const
 {
-	time_t periodBeginTime = mktime(&periodBegin);
-	time_t periodEndTime = mktime(&periodEnd);
-	shared_ptr<list<Car>> soldCars = make_shared<list<Car>>();
-	for (auto carPointer : cars)
+	list<shared_ptr<Car>> soldCars = list<shared_ptr<Car>>();
+	for (const auto & car : cars)
 	{
-		if (carPointer->wasSoldInPeriod(periodBeginTime, periodEndTime))
+		if (car->wasSoldInPeriod(periodBegin, periodEnd))
 		{
-			soldCars->push_back(*carPointer);
+			soldCars.push_back(car);
 		}
 	}
 	return soldCars;

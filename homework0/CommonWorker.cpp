@@ -1,16 +1,11 @@
 #include "CommonWorker.h"
 
-
-CommonWorker::CommonWorker(const string & name, double salary): AbstractWorker(name)
+CommonWorker::CommonWorker(const string & name, double salary): AbstractBaseWorker(name)
 {
 	this->salary = salary;
 }
 
-
-CommonWorker::~CommonWorker()
-{
-}
-
+CommonWorker::~CommonWorker() = default;
 
 void CommonWorker::print(ostream & stream) const
 {
@@ -21,7 +16,6 @@ void CommonWorker::print(ostream & stream) const
 		<< "Salary: " << salary << endl;
 	stream << sstream.str();
 }
-
 
 ostream & operator<<(ostream & stream, CommonWorker const & worker)
 {

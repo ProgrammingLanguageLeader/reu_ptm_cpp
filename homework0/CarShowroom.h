@@ -5,72 +5,59 @@
 #include <list>
 #include <typeinfo>
 #include <memory>
+#include <chrono>
 
 #include "Car.h"
-#include "AbstractWorker.h"
+#include "AbstractBaseWorker.h"
 #include "Salesman.h"
 #include "CommonWorker.h"
 
-
 using namespace std;
-
 
 struct CarNotFoundException : public exception
 {
-	CarNotFoundException() {};
+	CarNotFoundException() = default;
 
-	virtual const char* what() const throw()
-	{
+    const char* what() const noexcept override {
 		return "Car not found";
 	}
 };
 
-
 struct WorkerNotFoundException : public exception
 {
-	WorkerNotFoundException() {}
+	WorkerNotFoundException() = default;
 
-	virtual const char* what() const throw()
-	{
+    const char* what() const noexcept override {
 		return "Worker not found";
 	}
 };
 
-
 class CarShowroom
 {
 private:
-	string name;
 	list<shared_ptr<Car>> cars;
-	list<shared_ptr<AbstractWorker>> staff;
+	list<shared_ptr<AbstractBaseWorker>> staff;
 	double income = 0;
 	double losses = 0;
 
 public:
-	CarShowroom(string name);
+    CarShowroom();
 	~CarShowroom();
 
-	void sellCar(Salesman& salesman, const string & model);
-	void sellCar(Salesman& salesman, const string & model, const string & color);
-	void sellCar(Salesman& salesman, int id);
+	void sellCar(shared_ptr<Salesman> salesman, const string & model);
 
 	void addCar(shared_ptr<Car> newCar);
 
-	void addWorker(shared_ptr<AbstractWorker> worker);
-
-	shared_ptr<list<Salesman>> getSalesmanList() const;
+	void addWorker(shared_ptr<AbstractBaseWorker> worker);
 
 	shared_ptr<Car> getCar(int id) const;
 
-	shared_ptr<AbstractWorker> getWorker(const string & name) const;
-	shared_ptr<AbstractWorker> getWorker(int id) const;
+	shared_ptr<AbstractBaseWorker> getWorker(int id) const;
 
-	shared_ptr<list<Car>> getSoldCarsListByPeriod(tm& periodBegin, tm& periodEnd) const;
-
-	const string & getName() const
-	{
-		return name;
-	}
+	list<shared_ptr<Car>> getSoldCarsListByPeriod(
+	        chrono::time_point<chrono::system_clock> periodBegin,
+	        chrono::time_point<chrono::system_clock> periodEnd
+	        ) const;
 
 	double getIncome() const
 	{
@@ -82,4 +69,3 @@ public:
 		return losses;
 	}
 };
-
