@@ -13,25 +13,31 @@ using namespace std;
 
 void printBeverage(IBeverage* beverage)
 {
-	cout << "Beverage: " << beverage->GetDescription() << "Cost: " << beverage->GetCost() << endl;
+	cout << "Beverage: " << beverage->getDescription() << " | Cost: " << beverage->getCost() << endl;
 }
 
 int main()
 {
-	IBeverage *espresso = new Espresso();
-	IBeverage *blackTea = new BlackTea();
-	IBeverage *greenTea = new GreenTea();
+	IBeverage* espresso = new Espresso();
+	IBeverage* blackTea = new BlackTea();
+	IBeverage* greenTea = new GreenTea();
 
 	printBeverage(espresso);
 	printBeverage(blackTea);
 	printBeverage(greenTea);
 
-	cout << "-----------" << endl;
+	cout << "------------------------------------------------------------------" << endl;
 
-	IBeverage *capuccino = (IBeverage*) new SugarCondiment((IBeverage*) new MilkCondiment(new Espresso()));
+	IBeverage* capuccino = (IBeverage*) new SugarCondiment(
+		(IBeverage*) new MilkCondiment(
+			new Espresso()
+		)
+	);
 	printBeverage(capuccino);
 
-	IBeverage *greenTeaWithSugar = (IBeverage*) new SugarCondiment(new GreenTea());
+	IBeverage* greenTeaWithSugar = (IBeverage*) new SugarCondiment(
+		new GreenTea()
+	);
 	printBeverage(greenTeaWithSugar);
 
 	return 0;

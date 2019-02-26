@@ -6,10 +6,10 @@ class Espresso : public IBeverage
 public:
 	Espresso()
 	{
-		Desctiption = "Small portion of strong coffee";
+		description = "Small portion of strong coffee";
 	}
 
-	double GetCost()
+	double getCost()
 	{
 		return 150;
 	}

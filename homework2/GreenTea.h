@@ -6,10 +6,10 @@ class GreenTea : public IBeverage
 public:
 	GreenTea()
 	{
-		Desctiption = "Green leaf tea";
+		description = "Green leaf tea";
 	}
 
-	double GetCost()
+	double getCost()
 	{
 		return 125;
 	}

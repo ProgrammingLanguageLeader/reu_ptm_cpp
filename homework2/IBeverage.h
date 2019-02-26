@@ -1,17 +1,18 @@
 #pragma once
 #include <string>
+
 using namespace std;
 
 class IBeverage
 {
 protected:
-	string Desctiption = "";
+	string description = "";
 
 public:
-	string GetDescription()
+	string getDescription()
 	{
-		return Desctiption;
+		return description;
 	}
 
-	virtual double GetCost() = 0;
+	virtual double getCost() = 0;
 };

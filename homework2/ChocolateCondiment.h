@@ -10,11 +10,11 @@ public:
 	ChocolateCondiment(IBeverage* beverage)
 	{
 		_beverage = beverage;
-		Desctiption = (*_beverage).GetDescription() + " + Chocolate";
+		description = (*_beverage).getDescription() + " + Chocolate";
 	}
 
-	double GetCost()
+	double getCost()
 	{
-		return (*_beverage).GetCost() + 70;
+		return (*_beverage).getCost() + 70;
 	}
 };
