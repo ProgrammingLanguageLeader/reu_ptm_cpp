@@ -1,20 +1,17 @@
+#include <utility>
+
 #include "Doctor.h"
 
-
 Doctor::Doctor(
-	Game* model,
-	const std::string & name,
-	int healthPoints,
-	int maxHealthPoints
-) : Human(model, name, healthPoints, maxHealthPoints)
+		std::shared_ptr<Game> model,
+		const std::string & name,
+		int healthPoints,
+		int maxHealthPoints
+) : Human(std::move(model), name, healthPoints, maxHealthPoints)
 {
 }
 
-
-Doctor::~Doctor()
-{
-}
-
+Doctor::~Doctor() = default;
 
 void Doctor::logTreatment()
 {

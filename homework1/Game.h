@@ -6,7 +6,6 @@
 
 class Human;
 
-
 class Game
 {
 	std::list<std::shared_ptr<Human>> humans;
@@ -21,4 +20,3 @@ public:
 
 	void logGameState();
 };
-

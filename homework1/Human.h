@@ -3,9 +3,9 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <memory>
 
 #include "Game.h"
-
 
 class Human
 {
@@ -14,7 +14,7 @@ private:
 	int id;
 
 protected:
-	Game* model;
+	std::shared_ptr<Game> model;
 	std::string name;
 	int maxHealthPoints;
 	int healthPoints;
@@ -24,10 +24,10 @@ public:
 	static const int DEFAULT_HEALTH_POINTS = DEFAULT_MAX_HEALTH_POINTS;
 
 	Human(
-		Game* model, 
-		const std::string & name, 
-		int healthPoints = DEFAULT_HEALTH_POINTS, 
-		int maxHealthPoints = DEFAULT_MAX_HEALTH_POINTS
+			std::shared_ptr<Game> model,
+			const std::string & name,
+			int healthPoints = DEFAULT_HEALTH_POINTS,
+			int maxHealthPoints = DEFAULT_MAX_HEALTH_POINTS
 	);
 	~Human();
 
@@ -62,4 +62,3 @@ public:
 
 	void notifyModel(int id);
 };
-

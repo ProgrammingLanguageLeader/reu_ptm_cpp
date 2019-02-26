@@ -1,34 +1,29 @@
-#include "Human.h"
+#include <utility>
 
+#include "Human.h"
 
 int Human::freeHumanId = 1;
 
-
 Human::Human(
-	Game* model,
-	const std::string & name,
-	int healthPoints,
-	int maxHealthPoints
+		std::shared_ptr<Game> model,
+		const std::string & name,
+		int healthPoints,
+		int maxHealthPoints
 )
 {
 	this->id = freeHumanId++;
-	this->model = model;
+	this->model = std::move(model);
 	this->name = name;
 	this->healthPoints = healthPoints;
 	this->maxHealthPoints = maxHealthPoints;
 }
 
-
-Human::~Human()
-{
-}
-
+Human::~Human() = default;
 
 void Human::logTreatment()
 {
 	std::cout << "<Human> " << name << " is treating" << std::endl;
 }
-
 
 void Human::applyAbility()
 {
@@ -36,7 +31,6 @@ void Human::applyAbility()
 	logTreatment();
 	notifyModel(id);
 }
-
 
 void Human::notifyModel(int id)
 {

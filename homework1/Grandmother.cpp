@@ -1,20 +1,17 @@
+#include <utility>
+
 #include "Grandmother.h"
 
-
 Grandmother::Grandmother(
-	Game* model,
-	const std::string & name,
-	int healthPoints,
-	int maxHealthPoints
-) : Human(model, name, healthPoints, maxHealthPoints)
+		std::shared_ptr<Game> model,
+		const std::string & name,
+		int healthPoints,
+		int maxHealthPoints
+) : Human(std::move(model), name, healthPoints, maxHealthPoints)
 {
 }
 
-
-Grandmother::~Grandmother()
-{
-}
-
+Grandmother::~Grandmother() = default;
 
 void Grandmother::logTreatment()
 {

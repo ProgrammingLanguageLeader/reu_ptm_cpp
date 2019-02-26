@@ -5,19 +5,16 @@
 
 #include "Human.h"
 
-
-class Doctor :
-	public Human
+class Doctor : public Human
 {
 public:
 	Doctor(
-		Game* model, 
-		const std::string & name, 
-		int healthPoints = Human::DEFAULT_HEALTH_POINTS, 
-		int maxHealthPoints = Human::DEFAULT_MAX_HEALTH_POINTS
+			std::shared_ptr<Game> model,
+			const std::string & name,
+			int healthPoints = Human::DEFAULT_HEALTH_POINTS,
+			int maxHealthPoints = Human::DEFAULT_MAX_HEALTH_POINTS
 	);
 	~Doctor();
 
-	void logTreatment();
+	void logTreatment() override;
 };
-

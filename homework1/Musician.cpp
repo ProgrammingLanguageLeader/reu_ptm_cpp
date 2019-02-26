@@ -1,21 +1,17 @@
+#include <utility>
+
 #include "Musician.h"
 
-
-
 Musician::Musician(
-	Game* model,
-	const std::string & name,
-	int healthPoints,
-	int maxHealthPoints
-) : Human(model, name, healthPoints, maxHealthPoints)
+		std::shared_ptr<Game> model,
+		const std::string & name,
+		int healthPoints,
+		int maxHealthPoints
+) : Human(std::move(model), name, healthPoints, maxHealthPoints)
 {
 }
 
-
-Musician::~Musician()
-{
-}
-
+Musician::~Musician() = default;
 
 void Musician::logTreatment()
 {

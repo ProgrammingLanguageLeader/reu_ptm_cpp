@@ -1,28 +1,24 @@
 #include "Game.h"
 #include "Human.h"
 
-
 Game::Game()
 {
 	std::cout << "The game has just begun" << std::endl;
 }
-
 
 Game::~Game()
 {
 	std::cout << "The game has just finished" << std::endl;
 }
 
-
 void Game::addHuman(std::shared_ptr<Human> human)
 {
 	humans.push_back(human);
 }
 
-
 void Game::updateHumansHealth(int humanId)
 {
-	for (auto human : humans)
+	for (const auto & human : humans)
 	{
 		if (human->getId() == humanId)
 			continue;
@@ -30,10 +26,9 @@ void Game::updateHumansHealth(int humanId)
 	}
 }
 
-
 void Game::logGameState()
 {
-	for (auto human : humans)
+	for (const auto &human : humans)
 	{
 		std::cout << human->getName() << ": " << human->getHealthPoints() << " hp" << std::endl;
 	}
