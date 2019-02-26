@@ -8,11 +8,11 @@ private:
 	double value;
 
 public:
-	Money(double value = 0) { this->value = value; }
+	explicit Money(double value = 0) { this->value = value; }
 
-	Money(int rubles, int kopecks = 0) { value = rubles * 100 + kopecks; }
+	explicit Money(int rubles, int kopecks = 0) { value = rubles * 100 + kopecks; }
 
-	~Money() {};
+	~Money() = default;
 
 	void setValue(double value) { this->value = value; }
 
